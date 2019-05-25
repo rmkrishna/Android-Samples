@@ -3,33 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <CheckBox
+        android:id="@+id/canShowOutside"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show Magnifier outside View" />
 
     <TextView
         android:id="@+id/sampleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-         />
+        android:textSize="48sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World1111!"
-        />
+        android:text="Hello World1111!" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World2222!"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World333!"
-        />
 
 </LinearLayout>

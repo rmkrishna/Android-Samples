@@ -17,39 +17,54 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
         val magnifier = Magnifier.Builder(sampleText)
             .setInitialZoom(2.0f)
             .setElevation(20.0f)
             .setClippingEnabled(true)
             .setCornerRadius(10.0f * 3).build()
 
-        var outRect = Rect()
+        // Getting Visible drawing bounds of your view
+        val outRect = Rect()
+
+        // Getting Views's X and Y location from the screen
+        val viewPosition = IntArray(2)
+
+        sampleText.post {
+            sampleText.getDrawingRect(outRect)
+            sampleText.getLocationOnScreen(viewPosition)
+
+            // Setting offset to compare the rect with touch event raw values
+            outRect.offset(viewPosition[0], viewPosition[1])
+        }
+
         sampleText.setOnTouchListener { _, event ->
             when (event.action) {
+
+
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
-                    val viewPosition = IntArray(2)
-                    sampleText.getDrawingRect(outRect)
+                    if (!canShowOutside.isChecked &&
+                        !outRect.contains(event.rawX.toInt(), event.rawY.toInt())
+                    ) {
+                        magnifier.dismiss()
+                        return@setOnTouchListener false
+                    }
 
-                    sampleText.getLocationOnScreen(viewPosition)
-                    outRect.offset(viewPosition[0], viewPosition[1])
+                    val currentXPosition = event.rawX - viewPosition[0]
+                    val currentYPosition = event.rawY - viewPosition[1]
 
-
-                    if (outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                        var currentXPosition = event.rawX - viewPosition[0]
-                        var currentYPosition = event.rawY - viewPosition[1]
+                    if (showCustomizeCenterMagnifier.isChecked) {
                         magnifier.show(
                             currentXPosition,
                             currentYPosition,
                             currentXPosition,
-                            currentYPosition - (viewPosition[1].toFloat()/ 2)
+                            currentYPosition - (viewPosition[1].toFloat() / 2)
                         )
-
-//                        magnifier.show(
-//                            currentXPosition,
-//                            currentYPosition
-//                        )
                     } else {
-                        magnifier.dismiss()
+                        magnifier.show(
+                            currentXPosition,
+                            currentYPosition
+                        )
                     }
                 }
                 MotionEvent.ACTION_UP -> {

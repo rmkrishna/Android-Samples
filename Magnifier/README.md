@@ -1,2 +1,2 @@
-# **Magnifier Sample for Android P and Q**
+# Magnifier Sample for Android P and Q
 
