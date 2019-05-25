@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         val magnifier = Magnifier.Builder(sampleText)
             .setInitialZoom(2.0f)
             .setElevation(20.0f)
-            .setClippingEnabled(true)
             .setCornerRadius(10.0f * 3).build()
 
         // Getting Visible drawing bounds of your view
