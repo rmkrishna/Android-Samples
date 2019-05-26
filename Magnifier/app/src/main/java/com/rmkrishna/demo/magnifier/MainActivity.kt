@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         // Getting Views's X and Y location from the screen
         val viewPosition = IntArray(2)
 
+        // Wait till the screen to render
         sampleText.post {
             sampleText.getDrawingRect(outRect)
             sampleText.getLocationOnScreen(viewPosition)
@@ -46,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                         magnifier.dismiss()
                         return@setOnTouchListener false
                     }
-
                     magnifier.show(event.rawX - viewPosition[0], event.rawY - viewPosition[1])
                 }
                 MotionEvent.ACTION_UP -> {
