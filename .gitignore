@@ -65,3 +65,4 @@ fastlane/test_output
 fastlane/readme.md
 Magnifier/gradlew
 Magnifier/gradlew.bat
+ConstraintLayoutSample/.idea/*
